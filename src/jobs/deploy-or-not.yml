@@ -5,9 +5,9 @@ executor: default
 
 parameters:
   parameters:
-      param: 
-        description: Name of param to change
-        type: string 
+    param:
+      description: Name of param to change
+      type: string
 steps:
   steps:
     - run:
