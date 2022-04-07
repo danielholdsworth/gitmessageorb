@@ -9,9 +9,8 @@ parameters:
       description: Name of param to change
       type: string
 steps:
-  steps:
-    - run:
-        environment:
-          PARAM: <<parameters.param>>
-        name: Deploy or not?
-        command: ../scripts/deploy-or-not.sh
+  - run:
+      environment:
+        PARAM: <<parameters.param>>
+      name: Deploy or not?
+      command: ../scripts/deploy-or-not.sh
