@@ -12,4 +12,4 @@ steps:
       environment:
         PARAM: <<parameters.param>>
       name: Deploy or not?
-      command: ../scripts/deploy-or-not.sh
+      command: <<include(scripts/deploy-or-not.sh)>>
