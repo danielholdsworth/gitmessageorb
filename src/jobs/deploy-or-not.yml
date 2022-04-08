@@ -8,6 +8,7 @@ parameters:
     description: Name of param to change
     type: string
 steps:
+  - checkout
   - run:
       environment:
         PARAM: <<parameters.param>>
