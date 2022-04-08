@@ -1,13 +1,36 @@
 description: >
-  Sample example description.
-# Provide a use-case based example for using this orb.
-# Everything in the `usage` section will be displayed in the orb registry.
-# Comments are not retained.
+  Using a parameter `deploy` to gatekeep the deploy job.
+
 usage:
   version: 2.1
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
+    gitmessageorb: danielholdsworth/gitmessageorb@1.0.0
   workflows:
-    use-my-orb:
+    build&test:
+      when:
+        not: << pipeline.parameters.deploy >>
       jobs:
-        - <orb-name>/<job-name>
+        - build
+        - unit-test:
+            requires:
+              - build
+        - lint:
+            requires:
+              - build
+        - browser-test:
+            requires:
+              - build
+        - deploy-or-not:
+            requires:
+              - build
+              - unit-test
+              - lint
+              - browser-test
+
+    deploy:
+      when: << pipeline.parameters.deploy >>
+      jobs:
+        - deploy:
+            filters:
+              branches:
+                only: master
